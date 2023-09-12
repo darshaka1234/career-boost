@@ -1,5 +1,5 @@
 import {useState} from 'react'
-import { useAddCompanyMutation } from '../../features/companySlice';
+import { useAddCompanyMutation } from '../../features/apiSlice';
 
 const AddCompany = () => {
 
@@ -42,7 +42,7 @@ const [addCompany ] = useAddCompanyMutation()
     <div className="max-w-md mx-auto">
       <form className="space-y-4" onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="name" className="block text-gray-700">
+          <label htmlFor="Name" className="block text-gray-700">
             Name
           </label>
           <input
@@ -54,11 +54,11 @@ const [addCompany ] = useAddCompanyMutation()
           />
         </div>
         <div>
-          <label htmlFor="companySize" className="block text-gray-700">
+          <label htmlFor="Size" className="block text-gray-700">
             Company Size
           </label>
           <select
-            name="companySize"
+            name="Size"
             onChange={handleInputChange}
             
             className="block w-full px-4 py-2 mt-1 text-gray-700 border rounded-lg focus:outline-none focus:border-blue-500"

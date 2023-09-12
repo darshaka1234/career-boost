@@ -4,7 +4,7 @@ import App from "./App.tsx";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import { ApiProvider } from "@reduxjs/toolkit/dist/query/react/ApiProvider";
-import { apiSlice } from "./features/companySlice.ts";
+import { apiSlice } from "./features/apiSlice.ts";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
 	<React.StrictMode>
