@@ -1,23 +1,41 @@
 import {useState} from 'react'
-import { useAppDispatch } from "../../types/hook";
+import { useAddCompanyMutation } from '../../features/companySlice';
 
 const AddCompany = () => {
-  const dispatch = useAppDispatch();
 
-  const [company, setCompany] = useState({});
+const [addCompany ] = useAddCompanyMutation()
+  const [, setCompany] = useState({});
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
-    const { name, value }  = e.target;
-    setCompany({
-      ...company,
-      [name]: value,
-    });
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    setCompany((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
   };
 
-    const handleSubmit = (e:React.MouseEvent<HTMLFormElement>) => {
+ const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(company);
-    setCompany({ name: '', size: '' });
+   const { Name, Size } = e.currentTarget.elements as any;
+   
+       setCompany((company) => ({
+      ...company,
+      [e.currentTarget.name]: e.currentTarget.value,
+    }));
+    let formData = {
+      Name: Name.value,
+      Size: Size.value,
+   };
+   addCompany(formData)
+      .unwrap()
+      .then(() => {
+        setCompany(() => ({
+          Name: '',
+          Size: '',
+        }));
+      })
+      .catch((error: any) => {
+        console.log(error);
+      });
   };
 
   return (
